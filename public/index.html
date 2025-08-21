@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bills - Men's Garments Bill Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tshirt"></i> Men's Garments Shop</h1>
+            <p>Bill Generator</p>
+        </header>
+
+        <div class="shop-details">
+            <input type="text" id="shopName" placeholder="Shop Name" value="Style Men's Wear">
+            <input type="text" id="shopAddress" placeholder="Shop Address" value="123 Fashion Street, City">
+            <input type="text" id="shopPhone" placeholder="Contact No" value="9876543210">
+        </div>
+
+        <div class="customer-details">
+            <h3>Customer Details</h3>
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <input type="text" id="customerPhone" placeholder="Phone Number">
+            <input type="text" id="billNumber" placeholder="Bill Number" readonly>
+        </div>
+
+        <div class="item-section">
+            <h3>Add Items</h3>
+            <div class="item-form">
+                <select id="itemCategory">
+                    <option value="">Select Category</option>
+                    <option value="Shirts">Shirts</option>
+                    <option value="T-Shirts">T-Shirts</option>
+                    <option value="Jeans">Jeans</option>
+                    <option value="Trousers">Trousers</option>
+                    <option value="Shorts">Shorts</option>
+                    <option value="Jackets">Jackets</option>
+                    <option value="Suits">Suits</option>
+                    <option value="Shoes">Shoes</option>
+                </select>
+                <input type="text" id="itemName" placeholder="Item Description">
+                <input type="number" id="itemPrice" placeholder="Price" step="0.01" min="0">
+                <input type="number" id="itemQuantity" placeholder="Qty" min="1" value="1">
+                <select id="itemSize">
+                    <option value="">Size</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                <button onclick="addItem()"><i class="fas fa-plus"></i> Add Item</button>
+            </div>
+        </div>
+
+        <div class="bill-section">
+            <h3>Bill Details</h3>
+            <table id="billTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Size</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="billItems">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">₹0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>GST (18%):</span>
+                <span id="gst">₹0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total Amount:</span>
+                <span id="total">₹0.00</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="generateBill()" class="btn-primary"><i class="fas fa-print"></i> Generate Bill</button>
+            <button onclick="clearBill()" class="btn-secondary"><i class="fas fa-trash"></i> Clear Bill</button>
+            <button onclick="saveBill()" class="btn-success"><i class="fas fa-save"></i> Save Bill</button>
+        </div>
+
+        <div id="printArea" style="display: none;">
+            <div class="receipt">
+                <div class="receipt-header">
+                    <h2 id="printShopName">Style Men's Wear</h2>
+                    <p id="printShopAddress">123 Fashion Street, City</p>
+                    <p id="printShopPhone">Phone: 9876543210</p>
+                    <hr>
+                </div>
+                <div class="receipt-details">
+                    <p><strong>Bill No:</strong> <span id="printBillNumber"></span></p>
+                    <p><strong>Date:</strong> <span id="printDate"></span></p>
+                    <p><strong>Customer:</strong> <span id="printCustomerName"></span></p>
+                    <p><strong>Phone:</strong> <span id="printCustomerPhone"></span></p>
+                </div>
+                <table id="printTable">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Size</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="printItems">
+                    </tbody>
+                </table>
+                <div class="receipt-summary">
+                    <p><strong>Subtotal:</strong> ₹<span id="printSubtotal">0.00</span></p>
+                    <p><strong>GST (18%):</strong> ₹<span id="printGst">0.00</span></p>
+                    <p><strong>Total:</strong> ₹<span id="printTotal">0.00</span></p>
+                </div>
+                <div class="receipt-footer">
+                    <p>Thank you for shopping with us!</p>
+                    <p>Visit again</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
